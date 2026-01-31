@@ -1,21 +1,16 @@
 import ndlists as nd
 
 # import TME1_functions as tme1  # Uncomment and change the module name if you have TME1 functions from your previous work or solutions. YOU NEED TO UNCOMMENT THIS LINE TO USE TME1 FUNCTIONS
-import TME1.TME1_functions_solution as tme1  # Using the provided solutions for TME1 functions
+import sys
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'tme-1'))
+import TME1_functions as tme1
 
 from math import sqrt, pi, cos, sin, tan, exp
 from typing import List
 
-from random import random
+import random
 
-
-"""
-Replace with your name and the one of your working partner, otherwise you won't be evaluated
-Respect the syntax "firstname_lastname". If you have several names it is simply "pierre_paul_jacques_dupont"
-"""
-student_name = ["alejandro_jackson", "name2"]  # Replace with your names
-
-# Paste here all the functions you implemented in the TME2 notebook as well as the different examples you made to test them
 
 
 # Exercise 1
@@ -213,7 +208,7 @@ def simulate_measurement(state: nd.ndlist, projectors: List[nd.ndlist], n: int) 
 
     outcomes: List[int] = []
     for _ in range(n):
-        r = random.random()
+        r = random()
         for i, c in enumerate(cdf):
             if r <= c.real:
                 outcomes.append(i)

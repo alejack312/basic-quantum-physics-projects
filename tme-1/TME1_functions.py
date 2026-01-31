@@ -1,13 +1,13 @@
-from ndlists import ndlist
+from ndlists import ndlist, slicelen
 from typing import List
 
 from math import cos, sin, sqrt, pi
 
 """
 Replace with your name and the one of your working partner, otherwise you won't be evaluated
-Respect the syntax "firstname_lastname". If you have several names it is simply "pierre_paul_jacques_dupont"
+Respect the syntax "firstname_lastname"
 """
-student_name = ["name1", "name2"]  # Replace with your names
+student_name = ["alejandro_jackson", "katlyn_prophet"]
 
 
 # Paste here all the function you implemented in the TME1 notebook
@@ -18,6 +18,10 @@ def _ket(lst: list) -> 'ndlist':
     :param lst: list of elements
     :return: ndlist representing the ket
     """
+    # A ket is a ndarray object of shape $(n, 1)$, where $n > 1$, to avoid ambiguity
+    assert len(lst) > 1, "A ket must have more than one element"
+    # Assert that it is not a list of lists for example [[0,1]] is not a ket
+    assert not any(isinstance(item, list) for item in lst), "A ket must not be a list of lists"    
     return ndlist([[x] for x in lst])
 
 
@@ -27,8 +31,7 @@ def _norm(array: ndlist) -> float:
     :param array: ndlist object
     :return: norm (float)
     """
-    return sqrt(sum(x[0]**2 for x in array))
-
+    return sqrt(sum(x[0]**2 for x in array))    
 
 def _scalar_mult(scalar: complex, array: ndlist) -> 'ndlist':
     """
@@ -37,7 +40,10 @@ def _scalar_mult(scalar: complex, array: ndlist) -> 'ndlist':
     :param array: ndlist
     :return: ndlist object after multiplication
     """
-    return ndlist([[scalar * x[0]] for x in array])
+    # Support vectors and matrices; multiply element-wise and preserve shape
+    if len(array) > 0 and isinstance(array[0], list):
+        return ndlist([[scalar * array[i][j] for j in range(len(array[0]))] for i in range(len(array))])
+    return ndlist([scalar * element for element in array])
 
 
 def _normalize(array: ndlist) -> 'ndlist':
@@ -46,10 +52,12 @@ def _normalize(array: ndlist) -> 'ndlist':
     :param array: ndlist object
     :return: normalized ndlist object
     """
+    # Check for 0
     norm = _norm(array)
     if norm == 0:
         raise ValueError("Cannot normalize a zero vector.")
-    return _scalar_mult(1 / norm, array)
+    # Use _norm and _scalar_mult to normalize a ndlist object.
+    return _scalar_mult(1/_norm(array), array)
 
 
 # Exercise 2
@@ -113,13 +121,13 @@ def _matmul(A: ndlist, B: ndlist) -> 'ndlist':
 
     return result
 
-
 def _det(matrix: ndlist) -> float:
     """
     Compute the determinant of a square matrix.
     :param matrix: ndlist representing a square matrix
     :return: determinant (float)
     """
+    # Recursive approach to compute the determinant of a square matrix.
     if matrix.shape[0] != matrix.shape[1]:
         raise ValueError("Matrix must be square to compute determinant.")
 
@@ -139,7 +147,6 @@ def _det(matrix: ndlist) -> float:
         determinant += ((-1) ** col) * matrix[0, col] * _det(minor)
 
     return determinant
-
 
 def _transpose(matrix: ndlist) -> 'ndlist':
     """
@@ -168,7 +175,6 @@ def _hermitian(matrix: ndlist) -> 'ndlist':
             hermitian[j, i] = complex(matrix[i, j]).conjugate()
     return hermitian
 
-
 # Exercise 3
 def is_unitary(matrix: ndlist, tol: float = 1e-9) -> bool:
     """
@@ -195,10 +201,13 @@ def apply_unitary(ket: ndlist, U: ndlist) -> 'ndlist':
     :param U: ndlist representing the unitary matrix
     :return: ndlist representing the new ket
     """
+    # Check if the unitary matrix is unitary.
     if not is_unitary(U):
-        raise ValueError("The provided matrix is not unitary.")
+        raise ValueError("The unitary matrix is not unitary.")
+    # Check if the shapes of the ket and the unitary matrix are compatible for multiplication.
     if U.shape[1] != ket.shape[0]:
         raise ValueError("Incompatible shapes for matrix multiplication.")
+    # Multiply the ket by the unitary matrix.
     return _matmul(U, ket)
 
 
@@ -209,6 +218,7 @@ def bra(ket: ndlist) -> 'ndlist':
     :param ket: ndlist representing the ket
     :return: ndlist representing the bra
     """
+    # The bra is the Hermitian conjugate of the ket.
     return _hermitian(ket)
 
 
@@ -220,6 +230,7 @@ def _inner(ket1: ndlist, ket2: ndlist) -> complex:
     :param ket2: ndlist representing the second ket
     :return: inner product (complex)
     """
+    # The inner product is the sum of the products of the elements of the two kets.
     if ket1.shape != ket2.shape:
         raise ValueError("Kets must have the same shape for inner product.")
     bra1 = bra(ket1)
