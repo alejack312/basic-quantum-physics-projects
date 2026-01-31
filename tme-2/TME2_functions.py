@@ -9,7 +9,7 @@ import TME1_functions as tme1
 from math import sqrt, pi, cos, sin, tan, exp
 from typing import List
 
-from random import random
+import random
 
 
 

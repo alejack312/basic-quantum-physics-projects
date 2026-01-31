@@ -102,9 +102,9 @@ class ndlist(list):
             case (k, ):
                 return self._lst[k]
             case (int() as k0, *y):
-                return ndlist(self[k0])[*y]
+                return ndlist(self[k0])[tuple(y)]
             case (slice() as k0, *y):
-                return [ndlist(l)[*y] for l in self[k0]]
+                return [ndlist(l)[tuple(y)] for l in self[k0]]
             case _:
                 raise IndexError(
                     f"We do not know wat to do here with a key of of type: {type(key)} and of value: {key}")
