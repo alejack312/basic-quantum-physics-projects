@@ -6,7 +6,7 @@ import TME1_functions_solution as tme1  # Using the provided solutions for TME1 
 from math import sqrt, pi, cos, sin, tan, exp
 from typing import List
 
-from random import random
+import random
 
 
 """
