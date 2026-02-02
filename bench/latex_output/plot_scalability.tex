@@ -1,0 +1,16 @@
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\begin{semilogyaxis}[
+    xlabel={Number of Qubits},
+    ylabel={Time (seconds)},
+    grid=major,
+    legend pos=north west
+]
+\addplot[mark=*, blue, thick] table[x=x, y=y] {plot_scalability.dat};
+\addlegendentry{Quantum Simulator Scalability}
+\end{semilogyaxis}
+\end{tikzpicture}
+\caption{Quantum Simulator Scalability}
+\label{fig:quantum_simulator_scalability}
+\end{figure}

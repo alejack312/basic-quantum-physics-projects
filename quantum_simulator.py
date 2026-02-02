@@ -5,13 +5,24 @@ from pathlib import Path
 import sys
 
 ROOT = Path(__file__).resolve().parent
-TME3_DIR = ROOT / "tme-3"
-if TME3_DIR.exists() and str(TME3_DIR) not in sys.path:
-    sys.path.insert(0, str(TME3_DIR))
+TME1_DIR = ROOT / "tme-1"
+TME2_DIR = ROOT / "tme-2"
 
-import ndlists as nd  # noqa: E402
-import TME1_functions_solution as tme1  # noqa: E402
-import TME2_functions_solution as tme2  # noqa: E402
+# Add tme-1 and tme-2 to path if not already there
+if TME1_DIR.exists() and str(TME1_DIR) not in sys.path:
+    sys.path.insert(0, str(TME1_DIR))
+if TME2_DIR.exists() and str(TME2_DIR) not in sys.path:
+    sys.path.insert(0, str(TME2_DIR))
+
+# Suppress stdout during import to avoid encoding issues with print statements
+# in TME2_functions.py
+import io
+import contextlib
+
+with contextlib.redirect_stdout(io.StringIO()):
+    import ndlists as nd  # noqa: E402
+    import TME1_functions as tme1  # noqa: E402
+    import TME2_functions as tme2  # noqa: E402
 
 
 SQRT2_INV = 2 ** -0.5

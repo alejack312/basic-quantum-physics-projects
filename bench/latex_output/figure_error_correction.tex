@@ -1,0 +1,16 @@
+\begin{tikzpicture}
+\begin{axis}[
+    xlabel={Error Rate ($\gamma$)},
+    ylabel={Fidelity},
+    ymin=0.8,
+    ymax=1.0,
+    grid=major,
+    legend pos=south west,
+    width=0.8\textwidth,
+    height=6cm
+]
+\addplot[mark=*, blue, thick] table[x=gamma, y=fidelity_before] {plot_error_correction.dat};
+\addplot[mark=square, red, thick] table[x=gamma, y=fidelity_after] {plot_error_correction.dat};
+\legend{$F_{\text{before}}$, $F_{\text{after}}$}
+\end{axis}
+\end{tikzpicture}

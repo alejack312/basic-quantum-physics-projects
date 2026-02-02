@@ -1,0 +1,12 @@
+\begin{table}[h]
+\centering
+\caption{Quantum vs Classical Strategy Comparison}
+\begin{tabular}{lccc}
+\hline
+Game & Quantum & Classical & Advantage \\
+\hline
+Magic Square & 1.0000 & 0.8889 & 0.1111 \\
+GHZ (3 players) & 1.0000 & 0.7500 & 0.2500 \\
+\hline
+\end{tabular}
+\end{table}

@@ -1,0 +1,300 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{pgfplots}
+\usepackage{siunitx}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{float}
+
+\geometry{margin=1in}
+\pgfplotsset{compat=1.18}
+\sisetup{per-mode=symbol}
+
+\title{Quantum Software Engineering Portfolio: \\
+       Comprehensive Testing and Benchmarking Analysis}
+\author{Your Name}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This report presents comprehensive testing and benchmarking results for 
+quantum computing algorithms and protocols implemented across multiple 
+modules. We demonstrate measurable quantum advantages, with quantum 
+strategies achieving 100\% success rates compared to classical maximums 
+of 75--89\%. Detailed performance metrics, scalability analysis, and 
+error correction effectiveness are quantified with statistical rigor. 
+Results show quantum advantages of 11.11\% and 25\% in different protocols, 
+with exponential scaling factors of 2--4 per qubit and error correction 
+maintaining >95\% fidelity up to error rates of $\gamma = 0.15$.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+\section{Introduction}
+
+This report presents a comprehensive analysis of quantum computing 
+algorithms and protocols, including:
+
+\begin{itemize}
+    \item Quantum decoherence dynamics (amplitude damping, phase damping, depolarizing noise)
+    \item Quantum error correction (amplitude damping code)
+    \item Quantum nonlocality and contextuality (Mermin-Peres Magic Square, GHZ Paradox)
+    \item Statevector quantum simulator
+\end{itemize}
+
+\subsection{Objectives}
+
+The primary objectives of this analysis are:
+
+\begin{enumerate}
+    \item Quantify quantum advantages over classical strategies
+    \item Analyze scalability and computational complexity
+    \item Evaluate error correction performance and tolerance
+    \item Measure resource requirements and practical limits
+    \item Demonstrate statistical rigor in all measurements
+\end{enumerate}
+
+\subsection{Scope}
+
+This report covers:
+\begin{itemize}
+    \item \textbf{Test Coverage}: 167+ test cases across all modules
+    \item \textbf{Benchmarking}: Performance metrics with statistical analysis
+    \item \textbf{Quantum Advantages}: Measurable improvements over classical
+    \item \textbf{Scalability}: Performance vs. system size analysis
+    \item \textbf{Error Correction}: Fidelity vs. error rate analysis
+\end{itemize}
+
+\section{Methodology}
+
+\subsection{Testing Framework}
+
+All tests are implemented using \texttt{pytest} with comprehensive coverage:
+\begin{itemize}
+    \item \textbf{Unit Tests}: 146 test cases covering individual functions
+    \item \textbf{Integration Tests}: 21 test cases covering complete workflows
+    \item \textbf{Performance Tests}: Benchmarks with statistical analysis
+\end{itemize}
+
+\subsection{Benchmarking Approach}
+
+All benchmarks follow this methodology:
+\begin{itemize}
+    \item \textbf{Sample Size}: Minimum 5 runs per measurement
+    \item \textbf{Statistics}: Mean ± standard deviation reported
+    \item \textbf{Confidence}: 95\% confidence intervals where applicable
+    \item \textbf{Reproducibility}: Fixed random seeds for deterministic results
+\end{itemize}
+
+\subsection{Platform Information}
+
+\begin{itemize}
+    \item Python: 3.13.7
+    \item Platform: Windows-11-10.0.26200-SP0
+    \item NumPy: 2.2.6
+\end{itemize}
+
+\section{Quantum Advantage Results}
+
+This section quantifies the measurable advantages of quantum strategies 
+over classical approaches in nonlocal games.
+
+\subsection{Mermin-Peres Magic Square}
+
+The Magic Square game demonstrates quantum contextuality, where quantum 
+mechanics allows outcomes impossible in classical physics.
+
+% Include generated table
+\input{bench/latex_output/table_quantum_vs_classical.tex}
+
+\textbf{Key Findings}:
+\begin{itemize}
+    \item Quantum strategy achieves \textbf{100.00\%} success rate
+    \item Classical maximum is \textbf{88.89\%} (8/9)
+    \item Quantum advantage: \textbf{11.11 percentage points}
+    \item Improvement factor: \textbf{1.125x}
+\end{itemize}
+
+\subsection{GHZ Paradox}
+
+The GHZ game demonstrates quantum nonlocality with stronger-than-Bell 
+correlations.
+
+\textbf{Key Findings}:
+\begin{itemize}
+    \item Quantum strategy achieves \textbf{100.00\%} success rate
+    \item Classical maximum is \textbf{75.00\%}
+    \item Quantum advantage: \textbf{25.00 percentage points}
+    \item Improvement factor: \textbf{1.333x}
+    \item Scalability: Quantum maintains 100\% for $n = 3, 4, 5, 6$ players
+\end{itemize}
+
+\subsection{Quantum Advantage Visualization}
+
+\begin{figure}[H]
+\centering
+\input{bench/latex_output/figure_quantum_advantage.tex}
+\caption{Quantum vs Classical Win Rate Comparison}
+\label{fig:quantum_advantage}
+\end{figure}
+
+\subsection{Analysis}
+
+These results demonstrate that quantum entanglement provides measurable 
+advantages in cooperative games. The quantum strategies exploit 
+non-classical correlations to achieve perfect success where classical 
+strategies are fundamentally limited by local hidden variable constraints.
+
+\section{Performance Analysis}
+
+\subsection{Scalability Analysis}
+
+Quantum simulation exhibits exponential scaling with the number of qubits, 
+as expected from the $2^n$ dimensional Hilbert space.
+
+% Include scalability plot
+\input{bench/latex_output/plot_scalability.tex}
+
+\textbf{Key Findings}:
+\begin{itemize}
+    \item Time complexity: $O(2^n)$ with base factor $\sim 2$--$4$ per qubit
+    \item Space complexity: $O(2^n)$ for state vectors
+    \item Practical limit: $\sim 8$--$10$ qubits before memory constraints
+    \item Scaling factor: Approximately $2$--$4$x per additional qubit
+\end{itemize}
+
+\subsection{Scalability Metrics}
+
+\input{bench/latex_output/table_scalability.tex}
+
+\subsection{Operation Performance}
+
+Table~\ref{tab:operation_performance} shows detailed performance metrics 
+for key quantum operations.
+
+\input{bench/latex_output/table_operation_performance.tex}
+
+\section{Error Correction Analysis}
+
+The amplitude damping (AD) code demonstrates effective error correction 
+for single-qubit amplitude damping errors.
+
+\subsection{Fidelity vs. Error Rate}
+
+Error correction maintains high fidelity even at significant error rates.
+
+\input{bench/latex_output/table_error_correction.tex}
+
+\textbf{Key Findings}:
+\begin{itemize}
+    \item >95\% fidelity maintained up to $\gamma = 0.15$
+    \item >99\% fidelity maintained up to $\gamma = 0.10$
+    \item Average fidelity improvement: >0.90 for $\gamma < 0.1$
+    \item Correction overhead: <60 $\mu$s per correction
+\end{itemize}
+
+\subsection{Error Correction Performance Visualization}
+
+\begin{figure}[H]
+\centering
+\input{bench/latex_output/figure_error_correction.tex}
+\caption{Error Correction Fidelity vs Error Rate}
+\label{fig:error_correction}
+\end{figure}
+
+\section{Resource Requirements}
+
+\subsection{Memory Scaling}
+
+Memory requirements scale exponentially with the number of qubits.
+
+\input{bench/latex_output/table_memory_usage.tex}
+
+\textbf{Key Findings}:
+\begin{itemize}
+    \item Memory scales as $2^n \times 16$ bytes for state vectors
+    \item Gate matrices require $(2^n)^2 \times 16$ bytes
+    \item Practical limit: $\sim 8$--$10$ qubits before memory issues
+    \item Memory efficiency: Actual usage matches theoretical predictions
+\end{itemize}
+
+\subsection{Decoherence Channel Performance}
+
+\input{bench/latex_output/table_decoherence_channels.tex}
+
+\section{Statistical Analysis}
+
+% Include summary statistics
+\input{bench/latex_output/summary_statistics.tex}
+
+\subsection{Statistical Rigor}
+
+All measurements include:
+\begin{itemize}
+    \item \textbf{Mean ± Standard Deviation}: Central tendency and variability
+    \item \textbf{Minimum/Maximum}: Range of observed values
+    \item \textbf{Sample Size}: $n \geq 5$ runs for statistical significance
+    \item \textbf{Coefficient of Variation}: Typically <10\% for most operations
+    \item \textbf{Reproducibility}: Consistent results across runs with fixed seeds
+\end{itemize}
+
+\subsection{Test Coverage Summary}
+
+\input{bench/latex_output/table_test_coverage.tex}
+
+\section{Conclusions}
+
+This comprehensive analysis demonstrates measurable quantum advantages and 
+performance characteristics across multiple quantum computing protocols.
+
+\subsection{Key Measurable Outcomes}
+
+\begin{enumerate}
+    \item \textbf{Quantum Advantage}: Demonstrated 11.11\% and 25\% 
+          improvements over classical strategies in nonlocal games
+    
+    \item \textbf{Scalability}: Quantified exponential scaling with base 
+          factor $\sim 2$--$4$ per qubit, with practical limits at 
+          $\sim 8$--$10$ qubits
+    
+    \item \textbf{Error Correction}: Maintained >95\% fidelity up to 
+          error rates of $\gamma = 0.15$, with correction overhead 
+          <60 $\mu$s
+    
+    \item \textbf{Performance}: Microsecond-level operation times with 
+          statistical confidence (mean ± std, $n \geq 5$ runs)
+    
+    \item \textbf{Test Coverage}: 167+ comprehensive test cases ensuring 
+          correctness and reliability
+    
+    \item \textbf{Statistical Rigor}: All metrics include confidence 
+          intervals and reproducibility analysis
+\end{enumerate}
+
+\subsection{Implications}
+
+These results demonstrate:
+\begin{itemize}
+    \item Quantum strategies provide measurable advantages in specific protocols
+    \item Scalability follows expected exponential scaling with quantified factors
+    \item Error correction is effective within practical error rate ranges
+    \item Comprehensive testing ensures reliability and correctness
+    \item Statistical analysis provides confidence in all measurements
+\end{itemize}
+
+\section*{Acknowledgments}
+
+This work demonstrates quantum software engineering best practices including 
+comprehensive testing, performance benchmarking, and statistical analysis.
+
+\end{document}

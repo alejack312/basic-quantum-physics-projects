@@ -1,0 +1,25 @@
+\begin{tikzpicture}
+\begin{axis}[
+    ybar,
+    bar width=0.6cm,
+    xlabel={Game},
+    ylabel={Win Rate (\%)},
+    ymin=0,
+    ymax=100,
+    xticklabels={Magic Square, GHZ (3 players)},
+    legend pos=north west,
+    grid=major,
+    width=0.8\textwidth,
+    height=6cm
+]
+\addplot[fill=blue!30] coordinates {
+    (1, 100.00)
+    (2, 100.00)
+};
+\addplot[fill=red!30] coordinates {
+    (1, 88.89)
+    (2, 75.00)
+};
+\legend{Quantum, Classical}
+\end{axis}
+\end{tikzpicture}

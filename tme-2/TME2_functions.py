@@ -208,7 +208,7 @@ def simulate_measurement(state: nd.ndlist, projectors: List[nd.ndlist], n: int) 
 
     outcomes: List[int] = []
     for _ in range(n):
-        r = random()
+        r = random.random()
         for i, c in enumerate(cdf):
             if r <= c.real:
                 outcomes.append(i)
